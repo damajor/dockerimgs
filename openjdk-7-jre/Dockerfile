@@ -6,13 +6,19 @@
 #
 
 # Pull base image.
-FROM dockerfile/ubuntu
+FROM phusion/baseimage
+
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
 
 # Install Java.
 RUN \
   apt-get update && \
   apt-get install -y openjdk-7-jre && \
   rm -rf /var/lib/apt/lists/*
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Define working directory.
 WORKDIR /data
