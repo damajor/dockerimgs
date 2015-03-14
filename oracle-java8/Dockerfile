@@ -8,9 +8,6 @@
 # Pull base image.
 FROM phusion/baseimage
 
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
-
 # Install Java.
 RUN \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
@@ -29,5 +26,8 @@ WORKDIR /data
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
+RUN \
+  echo "export PATH=${JAVA_HOME}/bin:${PATH}" >> /etc/bash.bashrc
+
 # Define default command.
-#CMD ["bash"]
+CMD ["bash"]

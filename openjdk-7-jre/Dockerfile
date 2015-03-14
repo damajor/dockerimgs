@@ -8,9 +8,6 @@
 # Pull base image.
 FROM phusion/baseimage
 
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
-
 # Install Java.
 RUN \
   apt-get update && \
@@ -26,5 +23,8 @@ WORKDIR /data
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
+RUN \
+  echo "export PATH=${JAVA_HOME}/bin:${PATH}" >> /etc/bash.bashrc
+
 # Define default command.
-#CMD ["bash"]
+CMD ["bash"]
