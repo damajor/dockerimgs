@@ -14,6 +14,11 @@ RUN wget --user-agent="fido" \
   --referer="http://connect.wso2.com/wso2/getform/reg/new_product_download" \
   http://product-dist.wso2.com/products/complex-event-processor/3.1.0/wso2cep-3.1.0.zip
 
+wget --user-agent="fido" \
+  --output-document /opt/wso2mb.zip \
+  --referer="http://connect.wso2.com/wso2/getform/reg/new_product_download" \
+  http://product-dist.wso2.com/products/message-broker/2.2.0/wso2mb-2.2.0.zip
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -24,11 +29,14 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 RUN unzip /opt/wso2cep.zip -d /opt
+RUN unzip /opt/wso2mb.zip -d /opt
+
+RUN cp /opt/wso2mb-2.2.0/client-lib/* /opt/wso2cep-3.1.0/repository/components/lib/
+
+RUM rm -fr /opt/wso2cep.zip /opt/wso2mb.zip /opt/wso2mb-2.2.0
 
 RUN \
   echo "export PATH=${JAVA_HOME}/bin:${PATH}" >> /etc/bash.bashrc
-
-EXPOSE 5672 8672
 
 # Define default command.
 CMD ["/opt/wso2cep-3.1.0/bin/wso2server.sh"]

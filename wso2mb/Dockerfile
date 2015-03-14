@@ -25,6 +25,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 RUN unzip /opt/wso2mb.zip -d /opt
 
+RUN rm -fr /opt/wso2mb.zip
+
 RUN \
   echo "export PATH=${JAVA_HOME}/bin:${PATH}" >> /etc/bash.bashrc
 
@@ -32,7 +34,3 @@ EXPOSE 5672 8672
 
 # Define default command.
 CMD ["/opt/wso2mb-2.2.0/bin/wso2server.sh"]
-
-# Use baseimage-docker's init system.
-#CMD ["/sbin/my_init"]
-
