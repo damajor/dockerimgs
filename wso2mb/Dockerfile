@@ -1,7 +1,7 @@
 # WSO2 MB 2.2.0
 
 # Pull base image.
-FROM damajor/dockerimgs:oracle-java8
+FROM damajor/dockerimgs:oracle-java7
 
 # Install Java.
 RUN \
@@ -21,7 +21,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 #WORKDIR /data
 
 # Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 
 RUN unzip /opt/wso2mb.zip -d /opt
 
