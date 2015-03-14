@@ -14,7 +14,7 @@ RUN wget --user-agent="fido" \
   --referer="http://connect.wso2.com/wso2/getform/reg/new_product_download" \
   http://product-dist.wso2.com/products/complex-event-processor/3.1.0/wso2cep-3.1.0.zip
 
-wget --user-agent="fido" \
+RUN wget --user-agent="fido" \
   --output-document /opt/wso2mb.zip \
   --referer="http://connect.wso2.com/wso2/getform/reg/new_product_download" \
   http://product-dist.wso2.com/products/message-broker/2.2.0/wso2mb-2.2.0.zip
